@@ -1,7 +1,7 @@
 # learning
 
 ## Rust
-[unit test](rust/unit_test/rust_unit_test.md)
+[rust](./rust/rust.md)
 
 ## Web frameworks
 - [web frameworks](./web_frameworks/web_frameworks.md)
