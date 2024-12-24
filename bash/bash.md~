@@ -1,0 +1,147 @@
+${toc}
+
+# References
+
+. Become a bash scripting pro - full course (youtube) code is everything (https://www.youtube.com/watch?v=4ygaA_y1wvQ)
+
+
+# Become a bash scriptingg pro
+
+## the shebang
+
+```sh
+#!/usr/bin/env bash
+```
+
+tells the system which interpreter to use for the script.
+prefer /usr/bin/env bash : more portable than /bin/bash
+
+example:
+```sh
+#!/usr/bin/env bash
+
+echo "Hello world!"
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+kubectl get pods -A --no-headers | fzf | awk '{print $2, $1}' | xargs -n 2 sh -c 'kubectl describe pod $0 -n $1'
+```
+
+## permissions
+
+```sh
+chmod u+x ./hello.sh
+```
+give execute permission to the user
+
+## variable 
+
+```sh
+name="Youtube"
+```
+important: no space between the variable name, the equal sign and the expression.
+if there are some spaces, the interpreter will interpret the line as a command followed by arguments.
+
+
+To reference a variable: $<variable name>
+```sh
+#!/usr/bin/env bash 
+name="Youtube"
+echo "Hello, $name"
+```
+
+If single quote is used instead of double quote, the variable expansion is not done.
+```sh
+echo 'Hello, $name'
+```
+Hello, $name
+
+You can use the notation with curly braces ${} which has some nice capacities
+```sh
+echo "Hello, ${name}"
+```
+Hello, Youtube
+
+```sh
+echo "Hello, ${#name}"
+```
+Hello, 7
+
+
+- Default value
+```sh
+#!/usr/bin/env bash
+
+name=""
+echo "Hello, ${name:-"Anonymous"}"
+```
+Hello, Anonymous
+
+## Subshell
+
+subshell: ()
+
+```sh
+> pwd
+/home/pandaemonium/tmp
+> (cd ..; pwd)
+/home/pandaemonium
+> pwd
+/home/pandaemonium/tmp
+```
+
+use for command subsitution with $()
+
+```sh
+> var=$(pwd)
+> echo $var
+/home/pandaemonium
+```
+
+process substitution: <()
+
+```sh
+> diff <(ls ./v1) <(ls ./v2)
+```
+
+arithmetic expansion: $(())
+
+```sh
+> $((2+2))
+4
+```
+
+## Command line arguments
+
+```sh
+> ./mergeav.sh input.mp4 input.wav output.mp4
+       ($0)      ($1)      ($2)       ($3)
+```
+```
+video_input=$1
+audio_input=$2
+output=$3
+
+ffmpeg -i "$video_input" -i "$audio_input" -c:v copy - c:a aac 0:v:0 -map 1:a:0 "$output"
+```
+
+## If statement
+
+```sh
+if [[ some_condidion ]]; then
+    echo "this condition is true"
+elif [[ some_other_condition ]]; then
+    echo "some other condition is true"
+else
+    echo "none of the condition are true"
+fi
+```
+
+## Exit codes
+
+exit code 0 -> Success :+1:\
+any other value -> Failure :-1:
+
+
+
+
+
+

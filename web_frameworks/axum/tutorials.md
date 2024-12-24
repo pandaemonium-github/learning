@@ -6,3 +6,7 @@
 - modules
 - login and cookies
 - api
+
+## [Unit testing of Rust web APIs with axum 0.6](https://www.youtube.com/watch?v=_cYIhG_3qSo)
+
+
